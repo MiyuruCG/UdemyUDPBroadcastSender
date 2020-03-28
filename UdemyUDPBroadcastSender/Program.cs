@@ -1,4 +1,7 @@
-﻿using System;
+﻿/* 
+ * Udemy :: UDP Socket Programming For Distributed Computing in C# .NET
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
