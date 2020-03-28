@@ -29,16 +29,34 @@ namespace UdemyUDPBroadcastSender
             //the array of data that we want to broadcast (we can only send byte arrays)
             byte[] broadcastBuffer = new byte[] { 0x0D, 0x0A}; // stands for /r/n
 
+            string strUserInput = string.Empty;
+
             try
             {
-                sockBroadCaster.SendTo(broadcastBuffer, broadcastEP); //send operation
-                //1 :: the array we are sending 
-                //2 :: end point where the data we want to go
+                while (true)
+                {
+
+                    Console.WriteLine("Please enter string to broad cast, Type  <Exit> to close ...... ");
+                    strUserInput = Console.ReadLine();
+
+                    if (strUserInput.Equals("<Exit>"))
+                    {
+                        break;
+                    }
+
+                    //to send the string we need convert it in to a byte[]
+                    broadcastBuffer = Encoding.ASCII.GetBytes(strUserInput);//string to byte[]
+
+                    sockBroadCaster.SendTo(broadcastBuffer, broadcastEP); //send operation
+                    //1 :: the array we are sending 
+                    //2 :: end point where the data we want to go
+
+                }//while ends here
 
                 sockBroadCaster.Shutdown(SocketShutdown.Both); // disable all operation of the socket object
                 sockBroadCaster.Close();// free any resourses that are associated with this socket object
 
-            }
+            }//try ends here
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
